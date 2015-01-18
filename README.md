@@ -1,2 +1,2 @@
 # auto-pipe
-Automatic pipelines creation for common lisp
+Automatic pipelines creation for common lisp.
