@@ -2,6 +2,7 @@
 
 
 (defclass node-wrapper ()
+  "Wrapps node with additional informations: m-recives-from is list of node-symbols that corresponds to the nodes that sends data to the node, m-sends-to is list of nodes symbols that corresponds to nodes that nodes sends data to."
   ((m-node
     :initarg :node
     :accessor get-node)
@@ -14,6 +15,7 @@
 
 
 (defclass node-collection ()
+  "The object holding nodes (inside node-wrappers) and acting as any context for node symbols."
   ((m-nodes
     :initform (make-hash-table :test 'eq)
     :accessor get-nodes)))
@@ -44,7 +46,7 @@
                   targets-list))))
 
 
-(defmethod get-all-reciving-from ((object node-collection) id)
+(defmethod get-all-reciving-from ((object node-collection) node-symbol)
   (mapcar (lambda (x) (slot-value (gethash x (slot-value object 'm-nodes))
                                   'm-node))
           (get-recives-from (gethash id (slot-value object 'm-nodes)))))
@@ -81,7 +83,7 @@
               (get-recives-from b))))
 
 
-(defmethod send-to-node ((object node-collection) node-id &rest data)
+(defmethod send-to-node ((object node-collection) node-symbol &rest data)
   (apply #'send (get-node (gethash node-id
                                    (get-nodes object)))
          data))
