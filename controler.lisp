@@ -2,7 +2,6 @@
 
 
 (defclass node-wrapper ()
-  "Wrapps node with additional informations: m-recives-from is list of node-symbols that corresponds to the nodes that sends data to the node, m-sends-to is list of nodes symbols that corresponds to nodes that nodes sends data to."
   ((m-node
     :initarg :node
     :accessor get-node)
@@ -15,10 +14,10 @@
 
 
 (defclass node-collection ()
-  "The object holding nodes (inside node-wrappers) and acting as any context for node symbols."
   ((m-nodes
     :initform (make-hash-table :test 'eq)
-    :accessor get-nodes)))
+    :accessor get-nodes))
+  (:documentation "The object holding nodes (inside node-wrappers) and acting as any context for node symbols."))
 
 
 (defclass controler (node-collection)

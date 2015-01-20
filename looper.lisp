@@ -28,7 +28,7 @@
           (progn
             (run-worker worker
                         lo
-                        (pull-element lo)))
+                        (pull-element lo))) ;;pull-element is a method implemented for the queue
         (invalid-queue-state (e)
           (wait-for-queue-internal lo))))))
 
